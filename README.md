@@ -9,10 +9,11 @@ Drop DIRX.PRG and the included files into any folder in your vfp search path. Th
 To use it to produce a cursor of all files (recursively) in your VFP Set Path. 
 DirX('c_TheFiles','VFPPATH*.*','',.T.)
 With that, you can do operations on sets of files without looping. Here's how to find all .prg files that contain REPORT FORM. This is 5 times faster than GoFish.
-IF DirX('c_TheFiles','VFPPATH*.*','',.T.) > 0
+
 
 	*Which files contain "REPORT FORM"?
-	select ;
+IF DirX('c_TheFiles','VFPPATH*.*','',.T.) > 0
+select ;
 		occurs('REPORT FORM',upper(filetostr(alltrim(fullname)))) as nHowMany,*  ;
 	from ;
 		c_TheFiles ;
@@ -26,3 +27,4 @@ IF DirX('c_TheFiles','VFPPATH*.*','',.T.) > 0
 	INTO CURSOR ;
 		JUSTTHESE ;
 	NOFILTER
+ ENDIF
